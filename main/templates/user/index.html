@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %} 
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="feature-box">
+    <h2 style="font-family:times new roman;font-size:120%";>Profile Info :</h2>
+    <p style="font-family:arial;font-size:100%;line-height:1.2";>Username:        
+     {{user.username}}<br><br>
+     Name  : {{user.first_name}}  {{user.last_name}}<br><br>
+     <a align="center" class="button" href="{% url 'edit-user' %}"> Edit</a>
+    <p></p>
+  </div>
+
+
+<br><br>
+  <div align="center">
+  <div class = "section-book">
+    <h2 class = "heading-secondary" style="color: white">Search Rooms</h2>
+    <div class = "book__form">
+       <form method="post" action="{% url 'index' %}" id="options_form"> 
+                        <h2 class= "heading-tertiary">Start Date</h2><br>
+                        <h2 style='color:red' class= "heading-tertiary">
+                        {{form.start_date.errors}}</h2>
+
+                        {{ form.start_date }}
+                        
+                        <br>
+                        <h2 class= "heading-tertiary">End Date</h2><br>
+                        <h2 style='color:red'class= "heading-tertiary">
+                        {{form.end_date.errors}}</h2>
+                        
+                        {{ form.end_date }}
+                        <br>
+
+                        {% csrf_token %}
+                        <br>
+                        <button class="btn btn--green" type="submit">Search</button>
+
+       </form>                 
+  </div>
+  </div>
+  <div class="column side">
+    <h2></h2>
+    <p></p>
+  </div>
+</div>
+</div>
+  
+        
+{% endblock %}
