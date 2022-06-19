@@ -1,3 +1,48 @@
 .tm-section-2 {
-	height: 30vh;
+    min-height: 30vh;
+    padding-bottom: 30px;
 }
+
+.input-group .form-control:active,
+.input-group .form-control:focus,
+.input-group .form-control:hover {
+    z-index: 2 !important;
+}
+
+.overflow-x-atuo {
+    overflow-x: auto;
+}
+
+/* scroll styling */
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #6d9f2d;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #6d9f2d;
+}
+
+.profile-block {
+    min-width: 60vw;
+    padding: 23px;
+}
+
+.btn-primary {
+    float: right;
+}
+
+select[name='address'] {
+    height: 45px !important;
+} 

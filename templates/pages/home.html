@@ -12,35 +12,83 @@
                         <div class="form-row tm-search-form-row">
                             <div class="form-group tm-form-element tm-form-element-100">
                                 <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                <input name="city" type="text" class="form-control" id="inputCity" placeholder="Yashash joyingiz..." required>
+                                {% comment %} <input name="city" type="text" class="form-control" id="inputCity" placeholder="Yashash joyingiz..." required> {% endcomment %}
+                                {{ form.address }}
                             </div>
                             <div class="form-group tm-form-element tm-form-element-50">
                                 <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
-                                <input name="{{ form.start_date.name }}" type="text" class="form-control" id="inputCheckIn" placeholder="Boshlanish sanasi" required>
+                                {% comment %} <input name="{{ form.start_date.name }}" type="text" class="form-control" id="inputCheckIn" placeholder="Boshlanish sanasi" required> {% endcomment %}
+                                {{ form.start_date }}
                             </div>
                             <div class="form-group tm-form-element tm-form-element-50">
                                 <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
-                                <input name="{{ form.end_date.name }}" type="text" class="form-control" id="inputCheckOut" placeholder="Tugash sanasi" required>
-                            </div>
-                            <div class="form-group tm-form-element tm-form-element-2">
-                                <input type="submit" class="btn btn-primary" value="Izlash">
+                                {% comment %} <input name="{{ form.end_date.name }}" type="text" class="form-control" id="inputCheckOut" placeholder="Tugash sanasi" required> {% endcomment %}
+                                {{ form.end_date }}
                             </div>
                         </div>
+                        <div class="p-3">
+                            <input type="submit" class="btn btn-primary mb-4 w-100" value="Izlash">
+                        </div>
                     </form>
-                </div>                        
-            </div>      
+                </div>
+            </div>
         </div>
-    </div>                  
+    </div>
 </div>
 
 <div class="tm-section-2">
     <div class="container">
         <div class="row">
+            
+            {% if request.method == 'GET' %}
             <div class="col text-center">
-                <h2 class="tm-section-title">Biz sizga yordam berish uchun shu yerdamiz</h2>
-                <p class="tm-color-white tm-section-subtitle">Yangiliklarga a'zo bo'ling</p>
-                <a href="#" class="tm-color-white tm-btn-white-bordered">A'zo bo'lish</a>
-            </div>                
+                <h2 class="tm-section-title">Biz sizga qo'nim topishga yordam beramiz!</h2>
+                <p class="tm-color-white tm-section-subtitle">
+                    Yuqorida qayerda yashashingizni va qaysi sanada mehmonxona kerakligini ko'rsating,
+                    biz so'rovingizga mos kelgan mehmonxonalarni taklif qilamiz.
+                </p>
+                <a href="#" class="tm-color-white tm-btn-white-bordered">Mening rezervatsiyalarim</a>
+            </div>
+            {% else %}
+            {% for room in search_results %}
+            <div class="col-md-12 mt-2">
+                <div class="card">
+                    <div class="card-body overflow-x-atuo">
+                    <h5 class="card-title">{{ room }}</h5>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Hudud</th>
+                            <th scope="col">Mehmonxona</th>
+                            <th scope="col">Xona turi</th>
+                            <th scope="col">Nomeri</th>
+                            <th scope="col">Narxi</th>
+                            <th scope="col">Tavsifi</th>
+                            <th scope="col">Reytingi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ room.hotel.address }}</td>
+                            <td>{{ room.hotel }}</td>
+                            <td>{{ room.room_type }}</td>
+                            <td>{{ room.name }}</td>
+                            <td>${{ room.price }}</td>
+                            <td>{{ room.description|default:"..." }}</td>
+                            <td>{{ room.rating }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    <a href="{% url 'reservations:make_reservation' room_id=room.id %}" class="btn btn-primary">Band qilish</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col text-center">
+                <h2 class="tm-section-title">{{ request.session.start_date }} - {{ request.session.end_date }} gacha bo'sh mehmonxona topilmadi!</h2>
+            </div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>        
 </div>

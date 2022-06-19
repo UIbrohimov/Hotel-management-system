@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="tm-section-2">
+    <div class="container">
+        <div class="row">
+            {% for res in object_list %}
+            <div class="col-md-12 mt-2">
+                <div class="card">
+                    <div class="card-body overflow-x-atuo">
+                    <h5 class="card-title">{{ res }}</h5>
+                    <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Mehmonxona</th>
+                            <th scope="col">Xona nomeri</th>
+                            <th scope="col">Xonda turi</th>
+                            <th scope="col">Kattalar / Bolalar</th>
+                            <th scope="col">Kunlik narxi</th>
+                            <th scope="col">Umumiy narx</th>
+                            <th scope="col">Kirish sanasi</th>
+                            <th scope="col">Chiqish sanasi</th>
+                            <th scope="col">Xolati</th>
+                            <th scope="col">To'lov amalga oshirilgan</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="text-center">{{ forloop.counter }}</td class="text-center">
+                            <td class="text-center">{{ res.room.hotel }}</td class="text-center">
+                            <td class="text-center">{{ res.room.name }}</td class="text-center">
+                            <td class="text-center">{{ res.room.room_type }}</td class="text-center">
+                            <td class="text-center">{{ res.adults }} / {{ res.children }}</td class="text-center">
+                            <td class="text-center">{{ res.room.price }} sum</td class="text-center">
+                            <td class="text-center">{{ res.get_total_price }} sum</td class="text-center">
+                            <td class="text-center">{{ res.date_from|date:"d.m.Y" }}</td class="text-center">
+                            <td class="text-center">{{ res.date_to|date:"d.m.Y" }}</td class="text-center">
+                            <td class="text-center">{{ res.status }}</td class="text-center">
+                            <td class="text-center" class="text-center">{% if res.payed %}✅{% else %}❌{% endif %}</td class="text-center">
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col text-center">
+                <h2 class="tm-section-title">Hozircha sizda band qilingan mehmonxonalar yo'q</h2>
+            </div>
+            {% endfor %}
+        </div>
+    </div>        
+</div>
+
+{% endblock content %}

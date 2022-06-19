@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="tm-section tm-bg-img" id="tm-section-1">
+    <div class="tm-bg-white ie-container-width-fix-2 profile-block">
+        <div class="container ie-h-align-center-fix w-100">
+            <h2 class="text-center p-3">{{ user.username|upper }}</h2>
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Ism</th>
+                        <td>{{ user.info.first_name }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Familiya</th>
+                        <td>{{ user.info.last_name }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Telefon</th>
+                        <td>{{ user.info.phone }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Foydalanuvchi nomi</th>
+                        <td>{{ user.username }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">E-pochta</th>
+                        <td>{{ user.email }}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hudud</th>
+                        <td>{{ user.info.address }}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                {% if user.info %}
+                <a href="{% url 'userinfo:update_profile' pk=user.info.pk %}" class="btn btn-primary mt-3">Profil malumotlarini yangilash</a>
+                {% endif %}
+            </div>
+        </div>
+    </div> 
+</div>
+
+{% endblock content %}

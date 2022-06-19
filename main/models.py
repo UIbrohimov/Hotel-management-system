@@ -101,7 +101,7 @@ class Room(models.Model):
         verbose_name_plural = "Xonalar"
 
     def __str__(self):
-        return self.name
+        return f"{self.hotel} - {self.name}"
 
 
 class RoomRating(models.Model):

@@ -30,7 +30,7 @@ a:focus {
 .tm-color-primary {	color: #6d9f2d; }
 .tm-bg-primary { background: #6d9f2d; }
 .tm-bg-gray { background: #F4F4F4; }
-.tm-bg-white { background: white; }
+.tm-bg-white {background: white;}
 .tm-bg-dark-blue { background: #1f3646; }
 
 .tm-bg-white-shadow {
@@ -133,7 +133,8 @@ p {
 
 #tm-section-1 {	
 	background-image: url('../img/bg-img-1.jpg');	
-	height: 515px;
+	min-height: 515px;
+	padding: 50px 0;
 }
 
 #tm-section-5 { background-image: url('../img/bg-img-2.jpg'); }
@@ -202,9 +203,10 @@ p {
 
 .tm-form-element-icon {
 	color: #6d9f2d;
-	position: absolute;
-	top: 10px;
-	left: 15px;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    z-index: 3;
 }
 
 .tm-form-element-icon-small {

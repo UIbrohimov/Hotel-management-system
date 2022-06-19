@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="tm-section tm-bg-img" id="tm-section-1">
+    <div class="tm-bg-white ie-container-width-fix-2">
+        <div class="container ie-h-align-center-fix">
+            <h2 class="text-center p-3">{{ request.session.start_date }} dan {{ request.session.end_date }} gacha</h2>
+            <p class="text-center display-4">${{ room.price }}</p>
+            <div class="row">
+                <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
+                    <form action="{% url 'reservations:make_reservation' room_id=room.id %}" method="post" class="tm-search-form tm-section-pad-2">
+                        {% csrf_token %}
+                        <div class="form-row tm-search-form-row">
+                            <div class="form-group tm-form-element tm-form-element-100">
+                                <i class="fa fa-home fa-2x tm-form-element-icon"></i>
+                                <input name="city" type="text" class="form-control" id="inputCity" value="{{ room }}" disabled>
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-100">
+                                <i class="fa fa-user fa-2x tm-form-element-icon"></i>
+                                <input name="adults" type="number" class="form-control" id="inputAdults" placeholder="Kattalar..." required>
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-100">
+                                <i class="fa fa-users fa-2x tm-form-element-icon"></i>
+                                <input name="children" type="number" class="form-control" id="inputAdults" placeholder="Bolalar..." required>
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-50">
+                                <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
+                                {{ form.date_from }}
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-50">
+                                <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
+                                {{ form.date_to }}
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-2">
+                                <input type="submit" class="btn btn-primary w-100" value="Band qilish">
+                            </div>
+                        </div>
+                    </form>
+                </div>                        
+            </div>      
+        </div>
+    </div>                  
+</div>
+
+{% endblock content %}
