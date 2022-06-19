@@ -10,8 +10,6 @@ __pycache__/
 *.sock
 runtime.txt
 
-staticfiles/
-
 # Distribution / packaging
 .Python
 build/
