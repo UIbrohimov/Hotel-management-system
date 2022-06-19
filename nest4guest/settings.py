@@ -32,13 +32,16 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'main',
-    'payments', # django app for stripe payments
+    'payments',
+    'userinfo',
+    'reservations',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles'
+    'django.contrib.staticfiles',
+    'mptt'
 ]
 
 MIDDLEWARE = [
