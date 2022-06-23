@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from django.views.generic import View, DetailView, ListView, CreateView
+from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View
 from django.db.models import Q
 
 from reservations.models import Reservation
@@ -8,7 +9,7 @@ from .models import Room
 from .forms import ReservationForm
 
 
-class IndexView(View):
+class IndexView(LoginRequiredMixin, View):
     def get(self, request):
         form = ReservationForm()
         return render(request, 'pages/home.html', {'form': form})
@@ -27,10 +28,13 @@ class IndexView(View):
             request.session["end_date"] = str(end_date)
 
             reservs = Reservation.objects.filter(
-                Q(date_from__lte=start_date) & Q(date_to__lte=start_date)
-                | Q(date_from__gte=end_date)).distinct().values_list("room__id", flat=True)
+                (Q(date_to__lte=start_date, date_from__lt=start_date))
+                | (Q(date_from__gte=end_date, date_to__gt=end_date))
+                ).distinct().values_list("room__id", flat=True)
 
-            rooms = Room.objects.filter(
+            print(reservs)
+
+            rooms = Room.objects.prefetch_related('reservations').filter(
                 (Q(id__in=reservs) | Q(reservations__isnull=True)) & Q(hotel__address__in=address)
             ).distinct()
 

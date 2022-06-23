@@ -12,7 +12,7 @@ class UserInfoUpdateView(UpdateView):
     model = UserInfo
     template_name = 'userinfo/userinfo_form.html'
     fields = ['first_name', 'last_name', 'phone', 'address']
-    success_url = '/userinfo/profile/'
+    success_url = '/accounts/profile/'
 
 
 user_info_update_view = UserInfoUpdateView.as_view()
