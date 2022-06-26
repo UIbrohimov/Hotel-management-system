@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static %}
+{% load static i18n %}
 
 
 {% block content %}
@@ -44,6 +44,35 @@
                           </tr>
                         </tbody>
                       </table>
+                      <form method="post" action="." class="new-review-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="review[rating]" required>
+                        <fieldset>
+                            <div class="spr-form-review-rating">
+                                <label class="spr-form-label">{% trans "Ваша Оценка" %}</label>
+                                <div class="rating">
+                                    <div class="star-content">
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="spr-form-review-body">
+                                <div class="spr-form-input">
+                                    <textarea class="spr-form-input-textarea form-control" name="comment" rows="5" placeholder="{% trans 'Оставить комментарий' %}"></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <p class="text-danger" id="rateWarning">{% trans "Вам нужно сначала оценить продукт 👆" %}</p>
+                        <div class="submit">
+                            <input type="submit" name="addComment" id="submitComment" class="btn btn-default" value="{% trans 'Отправить отзыв' %}">
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>

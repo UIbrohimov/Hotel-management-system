@@ -46,3 +46,7 @@
 select[name='address'] {
     height: 45px !important;
 } 
+
+.checked {
+    color: #6d9f2d;
+}

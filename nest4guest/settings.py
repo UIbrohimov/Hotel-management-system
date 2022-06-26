@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'main',
     'payments',
     'userinfo',
+    'rating',
     'reservations',
     'django.contrib.admin',
     'django.contrib.auth',
