@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static mathfilters %}
 
 {% block content %}
 <script src="{% static 'js/jquery.min.js' %}"></script>             <!-- jQuery (https://jquery.com/download/) -->
@@ -77,9 +77,22 @@
                             <td>{{ room.hotel }}</td>
                             <td>{{ room.room_type }}</td>
                             <td>{{ room.name }}</td>
-                            <td>${{ room.price }}</td>
+                            <td>{{ room.price }} sum</td>
                             <td>{{ room.description|default:"..." }}</td>
-                            <td>{{ room.rating }}</td>
+                            <td>
+                                <div class="spr-form-review-rating">
+                                    <div class="rating">
+                                        <div class="star-content">
+                                            {% for item in room.rate|mul:'i' %}
+                                            <span class="fa fa-star checked"></span>
+                                            {% endfor %}
+                                            {% for item in 5|sub:room.rate|mul:'i' %}
+                                            <span class="fa fa-star"></span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                           </tr>
                         </tbody>
                       </table>

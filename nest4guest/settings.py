@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mptt',
     'tempus_dominus',
-    'crispy_forms'
+    'crispy_forms',
+    'mathfilters'
 ]
 
 MIDDLEWARE = [

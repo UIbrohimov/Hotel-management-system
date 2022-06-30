@@ -20,7 +20,10 @@ class RatingAdmin(admin.ModelAdmin):
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['hotel', 'room_type', 'rate', 'name', 'price']
+    list_editable = ['rate', 'price']
+    list_filter = ['hotel']
+    search_fields = ['hotel', 'name', 'id']
 
 
 @admin.register(RoomType)

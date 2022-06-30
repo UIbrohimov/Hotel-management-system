@@ -91,6 +91,7 @@ class Room(models.Model):
         null=True, blank=True,
         related_name='rooms'
     )
+    rate = models.IntegerField("Baho", default=0)
     name = models.CharField(max_length=100)
     price = models.IntegerField("Цена", default=0)
     description = models.TextField("Описание", blank=True)
