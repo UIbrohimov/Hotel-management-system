@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static i18n mathfilters %}
+
+
+{% block content %}
+<div class="tm-section-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-2">
+                <div class="card">
+                    <div class="card-body overflow-x-atuo">
+                    <h5 class="card-title"># {{ object.id }}</h5>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th scope="col">Mehmonxona</th>
+                                <td scope="col">{{ object.room.hotel }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Klient</th>
+                                <td scope="col">{{ object.person.info }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Boshlanish sanasi</th>
+                                <td scope="col">{{ object.date_from }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Tugash sanasi</th>
+                                <td scope="col">{{ object.date_to }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Katta yoshlilar</th>
+                                <td scope="col">{{ object.adults }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">Bolalar</th>
+                                <td scope="col">{{ object.children }}</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">To'lov amalga oshirilgan</th>
+                                <td scope="col">{% if object.payed %}✅{% else %}❌{% endif %}</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <form method="post" action="." class="new-review-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="review[rating]" required>
+                            <fieldset>
+                                <div class="spr-form-review-rating">
+                                    <label class="spr-form-label">{% trans "Ваша Оценка" %}</label>
+                                    <div class="rating">
+                                        <div class="star-content">
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="spr-form-review-body">
+                                    <div class="spr-form-input">
+                                        <textarea class="spr-form-input-textarea form-control" name="comment" rows="5" placeholder="{% trans 'Оставить комментарий' %}"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <p class="text-danger" id="rateWarning">{% trans "Вам нужно сначала оценить продукт 👆" %}</p>
+                            <div class="submit">
+                                <input type="submit" name="addComment" id="submitComment" class="btn btn-default" value="{% trans 'Отправить отзыв' %}">
+                            </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+</div>
+
+{% endblock content %}

@@ -49,3 +49,10 @@ class ReservationList(ListView):
 
 
 reservation_list = ReservationList.as_view()
+
+
+class ReservationDetail(DetailView):
+    model = Reservation
+
+
+reservation_detail = ReservationDetail.as_view()
